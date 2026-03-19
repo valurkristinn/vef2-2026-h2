@@ -33,9 +33,9 @@ export async function reqNews(type: "POST" | "PUT", body: NewsType) {
     return response;
   } catch (error) {
     if (error instanceof Error) {
-      return { isError: true, status: "500", message: error.message };
+      return { ok: false, status: "500", message: error.message };
     } else {
-      return { isError: true, status: "500", message: "Óþekkt villa við uppfærslu" };
+      return { ok: false, status: "500", message: "Óþekkt villa við uppfærslu" };
     }
   }
 }

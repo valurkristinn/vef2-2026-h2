@@ -28,9 +28,14 @@ async function submit(formData: FormData) {
     redirect(`/news/${news.slug}?edit=false`);
   } else {
     const status = request?.status ?? 500;
-    const errorData = await request?.json();
-    const errors = JSON.parse(errorData.error.message);
-    const message = encodeURIComponent(errors[0].message);
+    let message = "Unknown error";
+    if (request instanceof Response) {
+      const errorData = await request?.json();
+      const errors = JSON.parse(errorData.error.message);
+      message = encodeURIComponent(errors[0].message);
+    } else {
+      message = request.message;
+    }
     redirect(`/error?status=${status}&message=${message}`);
   }
 }
