@@ -1,4 +1,5 @@
 import { AuthorType, NewsType } from "@/app/lib/types";
+import Link from "next/link";
 
 export default function NewsPage({
   news,
@@ -14,6 +15,7 @@ export default function NewsPage({
       <p>
         {author.name} <span className="sub">{author.email}</span>
       </p>
+      <Link href={"/news/" + news.slug + "?edit=true"}>Edit</Link>
     </section>
   );
 }

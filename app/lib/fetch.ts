@@ -19,6 +19,36 @@ async function getData(url: string) {
   }
 }
 
+export async function reqNews(type: "POST" | "PUT", body: NewsType) {
+  const url = type == "PUT" ? "/news/" + body.slug: "/news";
+  console.log(process.env.API_URL + url);
+  try {
+    const response = await fetch(process.env.API_URL + url, {
+      method: type,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+
+      throw new Error(
+        `Response status: ${response.status}\nError message: ${errorData?.error?.message || "Óþekkt villa frá API"}`,
+      );
+    }
+
+    return response;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    } else {
+      console.error("Óþekkt villa:", error);
+    }
+  }
+}
+
 async function getList(url: string, offset?: number) {
   if (!offset) {
     offset = 0;

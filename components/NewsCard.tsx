@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { AuthorType, NewsType } from "@/app/lib/types";
 
 export default function NewsCard({
@@ -8,13 +10,12 @@ export default function NewsCard({
   authors: AuthorType[];
 }) {
   const authorObj = authors.find((a) => a.id === news.authorId);
-  
 
   return (
     <article>
-      <a href={"news/" + news.slug}>
+      <Link href={"news/" + news.slug}>
         <h3>{news.title}</h3>
-      </a>
+      </Link>
       <p>{news.excerpt}</p>
       <p>{authorObj && authorObj.name}</p>
     </article>
