@@ -26,7 +26,11 @@ async function submit(formData: FormData) {
   if (request && request.ok) {
     redirect(`/news/${news.slug}?edit=false`);
   } else {
-    console.error("Villa við uppfærslu");
+    const status = request?.status ?? 500;
+    const errorData = await request?.json();
+    const errors = JSON.parse(errorData.error.message);
+    const message = encodeURIComponent(errors[0].message);
+    redirect(`/error?status=${status}&message=${message}`);
   }
 }
 

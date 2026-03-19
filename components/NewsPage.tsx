@@ -11,6 +11,7 @@ export default function NewsPage({
   return (
     <section>
       <h1>{news.title}</h1>
+      <h4>{news.excerpt}</h4>
       <p>{news.content}</p>
       <p>
         {author.name} <span className="sub">{author.email}</span>
