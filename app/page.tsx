@@ -1,5 +1,5 @@
 import NewsList from "@/components/NewsList";
-import { getAuthors, getNews } from "./lib/fetch";
+import { getAuthors, getNews } from "@/src/fetch";
 import Link from "next/link";
 import Error from "@/components/Error";
 

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { AuthorType, NewsType } from "@/app/lib/types";
+import { AuthorType, NewsType } from "@/src/types";
 
 export default function NewsCard({
   news,

@@ -3,8 +3,8 @@ import {
   getAuthors,
   getNewsBySlug,
   reqNews,
-} from "@/app/lib/fetch";
-import { NewsType } from "@/app/lib/types";
+} from "@/src/fetch";
+import { NewsType } from "@/src/types";
 import NewsPage from "@/components/NewsPage";
 import NewsForm from "@/components/NewsForm";
 import { redirect } from "next/navigation";
