@@ -1,104 +1,115 @@
-# Vefforritun 2 2026, verkefni 4
+# Vefforritun 2, 2026, hópverkefni 2
 
-Verkefnið snýst um að setja upp react framenda fyrir vefþjónustu gerða í verkefni 3.
-
-## Markmið
-
-- Uppsetning og notkun á React.
-- Noktun á React components með props og state.
-- Routing í React verkefnum.
-
-## Vefþjónustur og gögn
-
-Þið getið notað þá vefþjónustu sem þið smíðuðuð í verkefni 3 eða notað [sýnilausn á verkefni 3](https://github.com/vefforritun/vef2-2026-v3-synilausn).
+Útfæra skal React framenda með Next.js ofan á vefþjónustur úr hópverkefni 1.
 
 ## Virkni
 
-Setja skal upp a.m.k. þrjár síður:
+Virkni fer mestmegnis eftir því hvað var útfært í hópverkefni 1.
 
-- Forsíðu sem birtir fréttir með „paging“ möguleika svo hægt sé að skoða allar fréttir.
-- Fréttasíðu sem birtir staka frétt með öllum upplýsingum.
-- Síðu sem leyfir að vinna með gögn, eitt af eftirfarandi:
-  - Búa til, breyta og eyða höfund.
-  - Búa til frétt með höfund.
-  - Breyta frétt með höfund.
+Verkefnið skal hafa a.m.k. þrjár mismunandi síður/virkni fyrir utan forsíðu. T.d. listi af færslum með síðuflettingum, stök færsla, leitarniðurstöður. Að auki skal útfæra þá virkni sem tiltekin er hér.
 
-Setja skal upp gagnvirkni, sjá að neðan.
+### Valmynd og haus
 
-Nota má React gegnum Vite eða Next.js. Ef Next.js er notað skal nota app directory og server components.
+Útfæra skal valmynd sem fer á milli mismunandi síða á vef þar sem hver síða birtir ákveðna virkni úr vefþjónustu. Þessi valmynd skal vera aðgengileg á öllum síðum og sýna hvaða síða er valin.
+
+Aukalega ef virkni er til staðar sem alltaf ætti að vera hægt að komast í skal birta hana (t.d. leit eða körfuvirkni) almennt/í haus.
+
+### Fótur
+
+Allar síðu skulu hafa sameiginlegan fót sem birtir eitthvað einfalt (t.d. „copyright“ upplýsingar).
+
+Ef til staðar er innskráning/virkni sem aðeins er fyrir stjórnendur skal hafa tengil á það í fæti.
 
 ### Forsíða
 
-Forsíða með einhverjum titli og birting á öllum fréttum: titli, útdrátt og höfund. Setja upp síðuflettingu þ.a. hægt sé að skoða allar fréttir.
+Forsíða hefur „statísk“ gögn með dummy content og mynd, setjið inn eigið með t.d. `lorem ipsum` texti og myndum frá [Unsplash](unsplash.com/).
 
-### Fréttasíða
+### Notendur
 
-Síða sem birtir staka frétt með öllum upplýsingum: titli, útdrátt, höfund og texta.
+Útfæra skal innskráningu á móti notendaumsjón í vefþjónustum og birta/leyfa aðgerðir sérstaklega fyrir innskráða notendur.
 
-Ef frétt er ekki til skal birta viðeigandi skilaboð.
+Ef skráning notanda er útfærð getur hún talist til síðu/virkni.
 
-### Unnið með gögn
+### Myndavirkni
 
-Eitt af eftirfarandi:
+Útbúa skal virkni á móti myndavirkni í vefþjónustu þ.a. hægt sé að setja inn myndir gegnum form.
 
-- Búa til, breyta og eyða höfund.
-- Búa til frétt með höfund.
-- Breyta frétt með höfund.
+## Útlit
 
-Ef villur koma upp frá vefþjónustu skal birta þær, bæði ef upp kemur almenn `500` villa og ef upp koma villur vegna notanda, t.d. `400` villa.
+Setja skal upp einfalt, skalanlegt útlit fyrir vefinn. Mælst er til að nota grid og flexbox.
 
-Ekki þarf að útfæra neina auka validation í framendanum fyrir utan að setja viðeigandi attribute á `<input>` ef það er talið nauðsynlegt.
+Leyfilegt er að nota Sass.
 
-Hægt er að útfæra fleiri en eitt atriði til upphækkunar, hámarkseinkunn 10.
+## Next.js og almenn virkni
 
-### Components
+Setja skal verkefnið upp með Next.js og TypeScript. Setja skal upp með _server-side rendering_ og _app router_.
 
-Setja skal upp a.m.k. fimm componenta sem halda utan um viðeigandi stöðu og taka við gögnum gegnum props. Það er frjálst að útbúa fleiri componenta ef það er nauðsynlegt.
+Ef kallað er í vefþjónustu á client side skal birta loading state og bregðast við villum. Þar sem gögn geta verið tóm skal huga að empty state.
 
-Hugmyndir að componentum:
+Ef síða finnst ekki skal birta 404 síðu.
 
-- `Layout` component sem heldur utan um header, efni og footer á síðu.
-- `NewsList` component sem birtir lista af fréttum.
-- `NewsItem` component sem birtir staka frétt.
-- Form componenta: `Form`, `Input` og `Button`.
+Ef reynt er að skoða síðu sem ekki er heimild til að skoða skal birta að ekki sé heimild til að skoða.
 
-## Tæki, tól og test
+## Tæki og tól
 
-Setja skal upp (eða nota uppsettningu með viðeigandi framework) `eslint`. Engar villur skulu vera til staðar.
+Setja skal upp eslint. Engar villur skulu koma fram ef npm run lint er keyrt. Leyfilegt er að skilgreina hvaða reglusett er notað, ekki er krafa um að nota það sem hefur verið notað í öðrum verkefnum.
 
-Ekki er krafa um að skrifa test.
+### Hýsing
 
-## Annað
+Setja skal upp vefinn í hýsingu.
 
-Grunnslóð (_base url_) á vefþjónustu ætti að geyma í env breytu.
+### README
 
-## GitHub og hýsing
+Í rót verkefnis skal vera `README.md` skjal sem tilgreinir:
 
-Setja skal upp vefinn í hýsingu gegnum GitHub.
+- Upplýsingar um hvernig setja skuli upp verkefnið.
+- Innskráning fyrir `admin` stjórnanda ásamt lykilorði.
+- Nöfn og notendanöfn allra í hóp.
+
+## Hópavinna
+
+Verkefnið skal unnið í hóp, helst með þremur einstaklingum. Hópar með tveim eða fjórum einstaklingum eru einnig í lagi, ekki er dregið úr kröfum fyrir færri í hóp en gerðar eru auknar kröfur ef fleiri en þrír einstaklingar eru í hóp.
+
+Hægt er að auglýsa eftir hóp á slack á rásinni `#vef2-2026-vantar-hóp`.
+
+Hafið samband við kennara ef ekki tekst eða ekki er mögulegt að vinna í hóp.
+
+Það er ekki krafa að vera í sama hóp og í hópverkefni 1 og hægt að vinna sem einstaklingsverkefni en hafið þá samband við Óla.
+
+Notast skal við Git og GitHub. Engar zip skrár með kóða ættu að ganga á milli í hópavinnu, heldur á að „committa“ allan kóða og vinna gegnum Git.
+
+Sjást ætti á commit history að allir meðlimir hóps hafi tekið þátt í verkefni.
+
+Útbúa ætti a.m.k. fimm Pull Request (PR) þar sem búið er að fara yfir af öðrum meðlim í hóp.
 
 ## Mat
 
-- 10% — Tengt við vefþjónustu.
-- 20% — Forsíða sem birtir fréttir.
-- 20% — Fréttasíða sem birtir staka frétt.
-- 20% — Unnið með gögn.
-  - Aukalega +10% fyrir hvert auka atriði.
-- 20% — Components útfærðir, a.m.k. fimm.
-- 10% — Tæki og tól; GitHub og hýsing.
-
-Hámarkseinkunn er 100% eða 10.
+- 20% Verkefni uppsett í Next.js og tengist vefþjónustum, almenn virkni útfærð.
+- 30% Útfærslur á móti vefþjónustum, a.m.k. þrjár síður.
+- 10% Útlit.
+- 10% Innskráning notanda.
+- 10% Útfært á móti myndavirkni.
+- 10% Tæki, tól og test. README uppsett, verkefni keyrir í hýsingu.
+- 10% Hópavinna með Git og GitHub PR.
 
 ## Sett fyrir
 
-Verkefni sett fyrir í fyrirlestri miðivkudaginn 4. mars 2026.
+Verkefni sett fyrir í fyrirlestri miðvikudaginn 25. febrúar 2026.
 
 ## Skil
 
-Skila skal í Canvas í seinasta lagi fyrir lok dags fimmtudaginn 19. mars 2026.
+Tilnefna skal hópstjóra sem skráir sig í ákveðinn hóp undir „Hópverkefni 2“ í Canvas. Aðrir nemendur skrá sig í framhaldinu í sama hóp; hópstjóri getur líka skráð aðra nemendur í hópinn.
+
+Útbúa skal hóp jafnvel ef verkefnið er unnið sem einstaklingsverkefni.
+
+Hópstjóri skal skila fyrir hönd allra í Canvas í seinasta lagi föstudaginn 10. apríl 2026.
+
+Mikilvægt er að öll skil séu gerð í hóp annars munu ekki allir nemendur fá einkunn.
 
 Skil skulu innihalda:
 
-- Slóð á verkefni keyrandi á Netlify.
+- GitHub notendanöfn allra (passa þarf að allir nemendur séu í hópnum!)
+- Slóð á verkefnið keyrandi í hýsingu
 - Slóð á GitHub repo fyrir verkefni. Dæmatímakennurum skal hafa verið boðið í repo. Notendanöfn þeirra eru:
   - `KristinFrida`
   - `MarzukIngi`
@@ -109,6 +120,8 @@ Skil skulu innihalda:
 Leyfilegt er að ræða, og vinna saman að verkefni en **skrifið ykkar eigin lausn**. Ef tvær eða fleiri lausnir eru mjög líkar þarf að færa rök fyrir því, annars munu allir hlutaðeigandi hugsanlega fá 0 fyrir verkefnið.
 
 Ekki er heimilt að nota stór mállíkön til að vinna verkefni í námskeiðinu, [sjá nánar um notkun](https://github.com/vefforritun/vef2-2026/blob/main/mallikon.md).
+
+Undantekning í þessu verkefni er til að endurtaka/útbúa fleiri componenta eftir forskrift. Í þeim tilvikum skal sérstaklega taka fram hvaða kóði var útbúinn þannig, með hvaða aðferðum, módellum og hvernig farið var yfir kóðann til að tryggja réttleika.
 
 ## Einkunn
 
@@ -123,5 +136,5 @@ Sett verða fyrir ([sjá nánar í kynningu á áfanga](https://github.com/veffo
 > Útgáfa 0.1
 
 | Útgáfa | Breyting      |
-| ------ | ------------- |
-| 0.1    | Fyrsta útgáfa |
+| ------ | ------------- | --- | ------------- |
+| 0.1    | Fyrsta útgáfa | 0.1 | Fyrsta útgáfa |
