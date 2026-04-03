@@ -1,11 +1,11 @@
-import { AuthorType, NewsType } from "@/src/types";
+import { AuthorType, EventType } from "@/src/types";
 import Link from "next/link";
 
-export default function NewsPage({
+export default function EventPage({
   news,
   author,
 }: {
-  news: NewsType;
+  news: EventType;
   author: AuthorType;
 }) {
   return (
@@ -14,7 +14,7 @@ export default function NewsPage({
       <h4>{news.excerpt}</h4>
       <p>{news.content}</p>
       <p>
-        {author.name}    <span className="text-xs text-gray">{author.email}</span>
+        {author.name} <span className="text-xs text-gray">{author.email}</span>
       </p>
       <Link href={"/news/" + news.slug + "?edit=true"}>Breyta</Link>
     </section>

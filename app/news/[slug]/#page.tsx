@@ -1,18 +1,18 @@
 import {
   getAuthorById,
   getAuthors,
-  getNewsBySlug,
-  reqNews,
+  getEventBySlug,
+  reqEvent,
 } from "@/src/fetch";
-import { NewsType } from "@/src/types";
-import NewsPage from "@/components/NewsPage";
-import NewsForm from "@/components/NewsForm";
+import { EventType } from "@/src/types";
+import EventPage from "@/components/EventPage";
+import EventForm from "@/components/EventForm";
 import { redirect } from "next/navigation";
 import Error from "@/components/Error";
 
 async function submit(formData: FormData) {
   "use server";
-  const news: NewsType = {
+  const news: EventType = {
     id: Number(formData.get("id")),
     title: formData.get("title") + "",
     slug: formData.get("slug") + "",
@@ -22,7 +22,7 @@ async function submit(formData: FormData) {
     authorId: Number(formData.get("authorId")),
   };
 
-  const request = await reqNews("PUT", news);
+  const request = await reqEvent("PUT", news);
 
   if (request && request.ok) {
     redirect(`/news/${news.slug}?edit=false`);
@@ -40,7 +40,7 @@ async function submit(formData: FormData) {
   }
 }
 
-export default async function News({
+export default async function Event({
   params,
   searchParams,
 }: {
@@ -50,7 +50,7 @@ export default async function News({
   const { slug } = await params;
   const { edit } = await searchParams;
 
-  const news = await getNewsBySlug(slug);
+  const news = await getEventBySlug(slug);
   if (!news) {
     return <Error status="404" message="Frétt fannst ekki" />;
   }
@@ -60,13 +60,13 @@ export default async function News({
       return <Error status="404" message="Frétt fannst ekki" />;
     }
 
-    return <NewsForm news={news} submit={submit} authors={authors.data} />;
+    return <EventForm news={news} submit={submit} authors={authors.data} />;
   } else {
     const author = await getAuthorById(news.authorId);
     if (!author) {
       return <Error status="404" message="Frétt fannst ekki" />;
     }
 
-    return <NewsPage news={news} author={author} />;
+    return <EventPage news={news} author={author} />;
   }
 }
