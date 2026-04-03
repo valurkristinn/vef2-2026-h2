@@ -1,11 +1,11 @@
-import { AuthorType, NewsType } from "@/src/types";
+import { AuthorType, EventType } from "@/src/types";
 
-export default function NewsForm({
+export default function EventForm({
   news,
   submit,
   authors,
 }: {
-  news: NewsType | undefined;
+  news: EventType | undefined;
   submit: string | ((formData: FormData) => void | Promise<void>) | undefined;
   authors: AuthorType[];
 }) {

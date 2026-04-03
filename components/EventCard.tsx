@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { EventType } from "@/src/types";
 
-export default function NewsCard({ events }: { events: EventType }) {
+export default function EventCard({ events }: { events: EventType }) {
   return (
     <article>
       <Link href={"events/" + events.id}>

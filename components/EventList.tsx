@@ -1,7 +1,7 @@
 import { EventType } from "@/src/types";
-import NewsCard from "./NewsCard";
+import EventCard from "./EventCard";
 
-export default function NewsList({
+export default function EventList({
   news,
 }: {
   news: EventType[];
@@ -10,7 +10,7 @@ export default function NewsList({
     <section>
     <h1>Fréttir</h1>
       {news.map((n: EventType) => (
-          <NewsCard events={n} key={n.id} />
+          <EventCard events={n} key={n.id} />
       ))}
     </section>
   );

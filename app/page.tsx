@@ -1,4 +1,4 @@
-import NewsList from "@/components/NewsList";
+import EventList from "@/components/EventList";
 import { getEvents } from "@/src/fetch";
 import Link from "next/link";
 import Error from "@/components/Error";
@@ -15,11 +15,14 @@ export default async function Home({
   const { page } = await searchParams;
   const pageNum = parseInt(page) ? parseInt(page) : 0;
 
-  const total = eventsList.paging.total;
+  const count = eventsList.paging.count;
   const limit = eventsList.paging.limit;
-  const MaxPage = Math.ceil(total / limit);
+  const maxPage = Math.ceil(count / limit);
+  console.log("total " + count);
+  console.log("limit " + limit);
+  console.log("maxPage " + maxPage);
 
-  const limitedPage = Math.max(Math.min(pageNum, MaxPage), MIN_PAGE);
+  const limitedPage = Math.max(Math.min(pageNum, maxPage), MIN_PAGE);
 
   const events = await getEvents((limitedPage - 1) * limit);
 
@@ -29,7 +32,7 @@ export default async function Home({
 
   return (
     <>
-      <NewsList news={events.data} />
+      <EventList news={events.data} />
       <div>
         <Link href={`./?page=${limitedPage - 1}`}>←</Link>
         <span>Síða {limitedPage}</span>

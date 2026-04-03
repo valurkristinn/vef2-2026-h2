@@ -11,6 +11,6 @@ export type ListType<T> = {
   paging: {
     limit: number;
     offset: number;
-    total: number;
+    count: number;
   };
 };
