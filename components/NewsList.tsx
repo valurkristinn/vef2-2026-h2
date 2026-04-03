@@ -1,18 +1,16 @@
-import { AuthorType, NewsType } from "@/src/types";
+import { EventType } from "@/src/types";
 import NewsCard from "./NewsCard";
 
 export default function NewsList({
   news,
-  authors,
 }: {
-  news: NewsType[];
-  authors: AuthorType[];
+  news: EventType[];
 }) {
   return (
     <section>
     <h1>Fréttir</h1>
-      {news.map((n: NewsType) => (
-          <NewsCard news={n} authors={authors} key={n.id} />
+      {news.map((n: EventType) => (
+          <NewsCard events={n} key={n.id} />
       ))}
     </section>
   );

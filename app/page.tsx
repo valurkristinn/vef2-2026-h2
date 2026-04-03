@@ -1,12 +1,11 @@
 import NewsList from "@/components/NewsList";
-import { getAuthors, getNews } from "@/src/fetch";
+import { getEvents } from "@/src/fetch";
 import Link from "next/link";
 import Error from "@/components/Error";
 
 const MIN_PAGE = 1;
 
-const newsList = await getNews();
-const authorList = await getAuthors();
+const eventsList = await getEvents();
 
 export default async function Home({
   searchParams,
@@ -16,21 +15,21 @@ export default async function Home({
   const { page } = await searchParams;
   const pageNum = parseInt(page) ? parseInt(page) : 0;
 
-  const total = newsList.paging.total;
-  const limit = newsList.paging.limit;
+  const total = eventsList.paging.total;
+  const limit = eventsList.paging.limit;
   const MaxPage = Math.ceil(total / limit);
 
   const limitedPage = Math.max(Math.min(pageNum, MaxPage), MIN_PAGE);
 
-  const news = await getNews((limitedPage - 1) * limit);
-  
-  if (!news) {
-    return <Error status="404" message="Frétt fannst ekki" />;
+  const events = await getEvents((limitedPage - 1) * limit);
+
+  if (!events) {
+    return <Error status="404" message="Viðburður fannst ekki" />;
   }
 
   return (
     <>
-      <NewsList news={news.data} authors={authorList.data} />
+      <NewsList news={events.data} />
       <div>
         <Link href={`./?page=${limitedPage - 1}`}>←</Link>
         <span>Síða {limitedPage}</span>
