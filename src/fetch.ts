@@ -1,4 +1,4 @@
-import { ListType, EventType } from "./types";
+import { EventType } from "./types";
 
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(process.env.API_URL + url, req);
@@ -52,10 +52,10 @@ async function getList(url: string, offset?: number) {
   return await getData(url + "?offset=" + offset);
 }
 
-export async function getEvents(offset?: number): Promise<ListType<EventType>> {
+export async function getEvents(offset?: number) {
   return await getList("/events", offset);
 }
 
-export async function getEventsById(id: number): Promise<EventType> {
+export async function getEventById(id: number) {
   return await getData("/events/" + id);
 }

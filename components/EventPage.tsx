@@ -1,22 +1,12 @@
-import { AuthorType, EventType } from "@/src/types";
-import Link from "next/link";
+import { EventType } from "@/src/types";
 
-export default function EventPage({
-  news,
-  author,
-}: {
-  news: EventType;
-  author: AuthorType;
-}) {
+export default function EventPage({ news }: { news: EventType }) {
   return (
     <section>
       <h1>{news.title}</h1>
-      <h4>{news.excerpt}</h4>
-      <p>{news.content}</p>
-      <p>
-        {author.name} <span className="text-xs text-gray">{author.email}</span>
-      </p>
-      <Link href={"/news/" + news.slug + "?edit=true"}>Breyta</Link>
+      <h4>{news.description}</h4>
+      <p>Staður: {news.placeID}</p>
+      <p>Er uppselt?: {news.soldOut}</p>
     </section>
   );
 }

@@ -18,9 +18,6 @@ export default async function Home({
   const count = eventsList.paging.count;
   const limit = eventsList.paging.limit;
   const maxPage = Math.ceil(count / limit);
-  console.log("total " + count);
-  console.log("limit " + limit);
-  console.log("maxPage " + maxPage);
 
   const limitedPage = Math.max(Math.min(pageNum, maxPage), MIN_PAGE);
 
