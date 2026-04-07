@@ -1,7 +1,7 @@
 import EventList from "@/components/EventList";
 import { getEvents } from "@/src/fetch";
 import Link from "next/link";
-import Error from "@/components/Error";
+import { notFound } from "next/navigation";
 
 const MIN_PAGE = 1;
 
@@ -23,9 +23,7 @@ export default async function Home({
 
   const events = await getEvents((limitedPage - 1) * limit);
 
-  if (!events) {
-    return <Error status="404" message="Viðburður fannst ekki" />;
-  }
+  if (!events) notFound();
 
   return (
     <>

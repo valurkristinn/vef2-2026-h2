@@ -1,4 +1,4 @@
-import Error from "@/components/Error";
+import { notFound, redirect } from "next/navigation";
 
 import { adminLogin, getEventById, getPlaceById } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
@@ -51,27 +51,19 @@ export default async function Event({
 
   const id = Number(slug) ? Number(slug) : undefined;
 
-  if (!id) {
-    return <Error status="404" message="Frétt fannst ekki" />;
-  }
+  if (!id) notFound();
 
   const event = await getEventById(id);
 
-  if (!event) {
-    return <Error status="404" message="Frétt fannst ekki" />;
-  }
+  if (event.error) notFound();
 
   const login = await adminLogin();
 
-  if (!login) {
-    return <Error status="401" message="Þú ert ekki innskráður" />;
-  }
+  if (!login) redirect("/login");
 
   const place = await getPlaceById(event.data.placeID, login);
 
-  if (place.error === "Unauthorized") {
-    return <Error status="401" message="Þú ert ekki innskráður" />;
-  }
+  if (place.error === "Unauthorized") redirect("/login");
 
   if (edit && edit.toLowerCase() === "true") {
     // const authors = await getAuthors();
