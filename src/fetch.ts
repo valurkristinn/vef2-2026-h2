@@ -2,29 +2,32 @@ import { EventType } from "./types";
 
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(process.env.API_URL + url, req);
-  if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
-  }
+
   return response.json();
 }
 
 export async function adminLogin() {
-  return await fetchApi("/api/auth/sign-in/email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Origin: process.env.API_URL + "",
+  const response = await fetch(
+    process.env.API_URL + "/api/auth/sign-in/email",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: process.env.API_URL + "",
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        email: "admin@example.org",
+        password: "admin12345",
+      }),
     },
-    credentials: "include",
-    body: JSON.stringify({
-      email: "admin@example.org",
-      password: "admin12345",
-    }),
-  });
+  );
+
+  return response.headers.get("set-cookie");
 }
 
-async function getData(url: string) {
-  return await fetchApi(url, { credentials: "include" });
+async function getData(url: string, cookie: string) {
+  return await fetchApi(url, { headers: { Cookie: cookie } });
 }
 
 export async function createEvent(body: EventType) {
@@ -49,7 +52,7 @@ async function getList(url: string, offset?: number) {
   if (!offset) {
     offset = 0;
   }
-  return await getData(url + "?offset=" + offset);
+  return await getData(url + "?offset=" + offset, "");
 }
 
 export async function getEvents(offset?: number) {
@@ -57,5 +60,9 @@ export async function getEvents(offset?: number) {
 }
 
 export async function getEventById(id: number) {
-  return await getData("/events/" + id);
+  return await getData("/events/" + id, "");
+}
+
+export async function getPlaceById(id: number, cookie: string) {
+  return await getData("/place/" + id, cookie);
 }

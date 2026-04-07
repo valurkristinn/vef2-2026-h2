@@ -6,6 +6,12 @@ export type EventType = {
   placeID: number;
 };
 
+export type PlaceType = {
+  id: number;
+  email: string;
+  address: string;
+};
+
 export type ListType<T> = {
   data: T[];
   paging: {

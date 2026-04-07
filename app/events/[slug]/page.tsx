@@ -1,6 +1,6 @@
 import Error from "@/components/Error";
 
-import { getEventById } from "@/src/fetch";
+import { adminLogin, getEventById, getPlaceById } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
 
 // import { EventType } from "@/src/types";
@@ -61,6 +61,18 @@ export default async function Event({
     return <Error status="404" message="Frétt fannst ekki" />;
   }
 
+  const login = await adminLogin();
+
+  if (!login) {
+    return <Error status="401" message="Þú ert ekki innskráður" />;
+  }
+
+  const place = await getPlaceById(event.data.placeID, login);
+
+  if (place.error === "Unauthorized") {
+    return <Error status="401" message="Þú ert ekki innskráður" />;
+  }
+
   if (edit && edit.toLowerCase() === "true") {
     // const authors = await getAuthors();
     // if (!authors) {
@@ -70,6 +82,6 @@ export default async function Event({
     // return <EventForm news={news} submit={submit} authors={authors.data} />;
     return <p>Breyta viðburði</p>;
   } else {
-    return <EventPage news={event.data} />;
+    return <EventPage news={event.data} place={place.data} />;
   }
 }
