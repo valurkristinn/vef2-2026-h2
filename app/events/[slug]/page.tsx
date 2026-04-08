@@ -57,7 +57,7 @@ export default async function Event({
 
   if (event.error) notFound();
 
-  const login = await adminLogin();
+  const login = await adminLogin({email:"admin@example.org",password:"admin12345"});
 
   if (!login) redirect("/login");
 

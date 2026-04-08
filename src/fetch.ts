@@ -1,29 +1,33 @@
 import { EventType } from "./types";
 
+const BASE_URL=process.env.API_URL || "http://localhost:4000"
+
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(process.env.API_URL + url, req);
 
   return response.json();
 }
 
-export async function adminLogin() {
+export async function adminLogin(credentials:{email:string, password:string}) {
   const response = await fetch(
     process.env.API_URL + "/api/auth/sign-in/email",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Origin: process.env.API_URL + "",
       },
       credentials: "include",
-      body: JSON.stringify({
-        email: "admin@example.org",
-        password: "admin12345",
-      }),
+      body: JSON.stringify(credentials),
     },
   );
 
-  return response.headers.get("set-cookie");
+  
+  if(!response.ok){
+    return {error:"login failure"}
+  }
+  
+  return {success:"login success"}
+  
 }
 
 async function getData(url: string, cookie: string) {
