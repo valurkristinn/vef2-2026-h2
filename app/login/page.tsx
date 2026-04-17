@@ -32,15 +32,15 @@ export default function Login(){
     
     <form onSubmit={onSubmit}>
         <h1>Login</h1>
-
+        <h4>Email</h4>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
-
+        />   
+        <h4>Password</h4>
         <input
           type="password"
           placeholder="Password"
@@ -48,7 +48,7 @@ export default function Login(){
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
+        <br></br>
         {error && <p>{error}</p>}
 
         <button type="submit">
