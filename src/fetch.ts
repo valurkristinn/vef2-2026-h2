@@ -3,6 +3,7 @@ import { EventType } from "./types";
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(process.env.API_URL + url, req);
 
+  console.log("fetchResult:", response);
   return response.json();
 }
 
