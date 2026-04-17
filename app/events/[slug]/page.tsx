@@ -1,7 +1,9 @@
 import { notFound, redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-import { login, getEventById, getPlaceById } from "@/src/fetch";
+import { getEventById, getPlaceById, getData, updateEvent } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
+import EventForm from "@/components/EventForm";
 
 // import { EventType } from "@/src/types";
 // import EventForm from "@/components/EventForm";
@@ -44,7 +46,7 @@ export default async function Event({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ edit: string }>;
+  searchParams: Promise<{ edit?: string }>;
 }) {
   const { slug } = await params;
   const { edit } = await searchParams;
@@ -57,23 +59,25 @@ export default async function Event({
 
   if (event.error) notFound();
 
-  const loginn = await login({email:"admin@example.org",password:"admin12345"});
-
-  if (!loginn.success) redirect("/login");
-
-  const place = await getPlaceById(event.data.placeID, loginn.success);
-
-  if (place.error === "Unauthorized") redirect("/login");
-
   if (edit && edit.toLowerCase() === "true") {
-    // const authors = await getAuthors();
-    // if (!authors) {
-    //   return <Error status="404" message="Frétt fannst ekki" />;
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore.toString();
+
+    const session = await getData("/api/auth/session", cookieHeader);
+    console.log("session user", session);
+    console.log("user's role", session?.user.role);
+
+    // TODO
+    // if (!session?.user || session.user.role !== "ADMIN") {
+    //   redirect("/login");
     // }
-    //
-    // return <EventForm news={news} submit={submit} authors={authors.data} />;
-    return <p>Breyta viðburði</p>;
-  } else {
-    return <EventPage news={event.data} place={place.data} />;
+
+    return <EventForm event={event.data} />;
   }
+
+  const place = await getPlaceById(event.data.placeID, "");
+
+  if (place.error) notFound();
+
+  return <EventPage news={event.data} place={place.data} />;
 }

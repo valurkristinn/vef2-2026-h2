@@ -9,6 +9,11 @@ export default function EventCard({ events }: { events: EventType }) {
         <h3>{events.title}</h3>
       </Link>
       <p>{events.description}</p>
+      <button>
+        <Link href={`/events/${events.id}?edit=true`}>
+          <p>Edit</p>
+        </Link>
+      </button>
     </article>
   );
 }

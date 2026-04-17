@@ -1,59 +1,66 @@
 import { EventType } from "./types";
 
-const BASE_URL=process.env.API_URL || "http://localhost:4000"
+const BASE_URL = process.env.API_URL || "http://localhost:4000";
 
 async function fetchApi(url: string, req: RequestInit) {
-  const response = await fetch(process.env.API_URL + url, req);
+  const response = await fetch(BASE_URL + url, req);
 
   console.log("fetchResult:", response);
-  return response.json();
-}
 
-export async function login(credentials:{email:string, password:string}) {
-  const response = await fetch(
-    BASE_URL + "/api/auth/sign-in/email",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    },
-  );
+  const json = await response.text();
 
-  
-  if(!response.ok){
-    return {error:"login failure"}
+  if (!json) {
+    console.error("");
+    return null;
   }
-  
-  return {success:"login success"}
-  
-}
 
-export async function signup(credentials:{name:string, email:string, password:string}) {
-  const response = await fetch(
-    BASE_URL + "/api/auth/sign-up/email",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(credentials),
-    },
-  );
-
-  
-  if(!response.ok){
-    return {error:"signup failure"}
+  try {
+    return JSON.parse(json);
+  } catch (error) {
+    console.error("Invalid JSON response:", json);
+    throw error;
   }
-  
-  return {success:"signup success"}
-  
 }
 
-async function getData(url: string, cookie: string) {
+export async function login(credentials: { email: string; password: string }) {
+  const response = await fetch(BASE_URL + "/api/auth/sign-in/email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    return { error: "login failure" };
+  }
+
+  return { success: "login success" };
+}
+
+export async function signup(credentials: {
+  name: string;
+  email: string;
+  password: string;
+}) {
+  const response = await fetch(BASE_URL + "/api/auth/sign-up/email", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(credentials),
+  });
+
+  if (!response.ok) {
+    return { error: "signup failure" };
+  }
+
+  return { success: "signup success" };
+}
+
+export async function getData(url: string, cookie: string) {
   return await fetchApi(url, { headers: { Cookie: cookie } });
 }
 
