@@ -1,6 +1,6 @@
 import { EventType } from "./types";
 
-const BASE_URL = process.env.API_URL || "http://localhost:4000";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"
 
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(BASE_URL + url, req);
