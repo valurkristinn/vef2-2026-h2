@@ -6,7 +6,6 @@ import { notFound } from "next/navigation";
 const MIN_PAGE = 1;
 
 const eventsList = await getEvents();
-console.log("eventsList: ", eventsList);
 
 export default async function Home({
   searchParams,
