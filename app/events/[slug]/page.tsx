@@ -1,7 +1,9 @@
 import { notFound, redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
-import { login, getEventById, getPlaceById } from "@/src/fetch";
+import { getEventById, getPlaceById, isAdmin } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
+import EventForm from "@/components/EventForm";
 
 // import { EventType } from "@/src/types";
 // import EventForm from "@/components/EventForm";
@@ -44,7 +46,7 @@ export default async function Event({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ edit: string }>;
+  searchParams: Promise<{ edit?: string }>;
 }) {
   const { slug } = await params;
   const { edit } = await searchParams;
@@ -53,27 +55,29 @@ export default async function Event({
 
   if (!id) notFound();
 
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
+
   const event = await getEventById(id);
 
   if (event.error) notFound();
 
-  const loginn = await login({email:"admin@example.org",password:"admin12345"});
+  if (edit && edit.toLowerCase() === "true") {
 
-  if (!loginn.success) redirect("/login");
+    if (! (await isAdmin(cookieString))) {
+      redirect("/login");
+    }
 
-  const place = await getPlaceById(event.data.placeID, loginn.success);
+    return <EventForm event={event.data} />;
+  }
+
+  const place = await getPlaceById(event.data.placeID, cookieString);
+  console.log("HHEEERRREEEE!-------------------");
+  console.log(cookieString)
+  console.log(place);
 
   if (place.error === "Unauthorized") redirect("/login");
+  else if (place.error) notFound();
 
-  if (edit && edit.toLowerCase() === "true") {
-    // const authors = await getAuthors();
-    // if (!authors) {
-    //   return <Error status="404" message="Frétt fannst ekki" />;
-    // }
-    //
-    // return <EventForm news={news} submit={submit} authors={authors.data} />;
-    return <p>Breyta viðburði</p>;
-  } else {
-    return <EventPage news={event.data} place={place.data} />;
-  }
+  return <EventPage news={event.data} place={place.data} />;
 }
