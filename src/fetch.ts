@@ -8,9 +8,9 @@ async function fetchApi(url: string, req: RequestInit) {
   return response.json();
 }
 
-export async function adminLogin(credentials:{email:string, password:string}) {
+export async function login(credentials:{email:string, password:string}) {
   const response = await fetch(
-    process.env.API_URL + "/api/auth/sign-in/email",
+    "http://localhost:4000/api/auth/sign-in/email",
     {
       method: "POST",
       headers: {
@@ -27,6 +27,28 @@ export async function adminLogin(credentials:{email:string, password:string}) {
   }
   
   return {success:"login success"}
+  
+}
+
+export async function signup(credentials:{name:string, email:string, password:string}) {
+  const response = await fetch(
+    "http://localhost:4000/api/auth/sign-up/email",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(credentials),
+    },
+  );
+
+  
+  if(!response.ok){
+    return {error:"signup failure"}
+  }
+  
+  return {success:"signup success"}
   
 }
 

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/src/fetch";
+import { signup } from "@/src/fetch";
 
 
-export default function Login(){
+export default function Signup(){
     const router = useRouter();
 
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -17,7 +18,7 @@ export default function Login(){
     setError("");
 
 
-    const response = await login({ email, password });
+    const response = await signup({name, email, password });
     console.log(response)
 
     router.push("/");
@@ -27,7 +28,15 @@ export default function Login(){
     return(
     
     <form onSubmit={onSubmit}>
-        <h1>Admin Login</h1>
+        <h1>Sign up</h1>
+
+        <input
+          type="name"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
 
         <input
           type="email"
@@ -48,7 +57,7 @@ export default function Login(){
         {error && <p>{error}</p>}
 
         <button type="submit">
-          Login
+          Signup
         </button>
       </form>
         
