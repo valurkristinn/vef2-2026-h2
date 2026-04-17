@@ -1,7 +1,7 @@
 export type EventType = {
   id: number;
   title: string;
-  image:Image;
+  images:Image[];
   description: string;
   soldOut: boolean;
   placeID: number;

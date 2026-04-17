@@ -7,7 +7,12 @@ export default function EventPage({
   news: EventType;
   place: PlaceType;
 }) {
-    const imgUrl=".."+news.image.image
+  console.log(news);
+    const imgUrl = news.images?.[0]?.image
+  ? ".." + news.images[0].image
+  : null;
+    console.log(news.images)
+    console.log(imgUrl)
   return (
     <section>
       <h1>{news.title}</h1>
