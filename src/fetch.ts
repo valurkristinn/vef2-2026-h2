@@ -10,7 +10,7 @@ async function fetchApi(url: string, req: RequestInit) {
 
 export async function login(credentials:{email:string, password:string}) {
   const response = await fetch(
-    "http://localhost:4000/api/auth/sign-in/email",
+    BASE_URL + "/api/auth/sign-in/email",
     {
       method: "POST",
       headers: {
@@ -32,7 +32,7 @@ export async function login(credentials:{email:string, password:string}) {
 
 export async function signup(credentials:{name:string, email:string, password:string}) {
   const response = await fetch(
-    "http://localhost:4000/api/auth/sign-up/email",
+    BASE_URL + "/api/auth/sign-up/email",
     {
       method: "POST",
       headers: {
