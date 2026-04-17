@@ -28,7 +28,7 @@ export default async function Home({
   return (
     <>
       <div>
-      <h2>Eventsíða</h2>
+      <h2>Forsíða</h2>
       <p>Þetta er síða sem inniheldur lista af events hægt er að breyta þeim ef loggað er inn sem admin.
         Hægt er að búa til aðgang og skrá sig inn til að skoða event meira
       </p>
