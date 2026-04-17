@@ -55,29 +55,32 @@ export default async function Event({
 
   if (!id) notFound();
 
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
+
   const event = await getEventById(id);
 
   if (event.error) notFound();
 
   if (edit && edit.toLowerCase() === "true") {
-    const cookieStore = await cookies();
-    const cookieHeader = cookieStore.toString();
-
-    const session = await getData("/api/auth/session", cookieHeader);
+    const session = await getData("/api/auth/session", cookieString);
     console.log("session user", session);
     console.log("user's role", session?.user.role);
 
-    // TODO
-    // if (!session?.user || session.user.role !== "ADMIN") {
-    //   redirect("/login");
-    // }
+    if (!session?.user || session.user.role !== "ADMIN") {
+      redirect("/login");
+    }
 
     return <EventForm event={event.data} />;
   }
 
-  const place = await getPlaceById(event.data.placeID, "");
+  const place = await getPlaceById(event.data.placeID, cookieString);
+  console.log("HHEEERRREEEE!-------------------");
+  console.log(cookieString)
+  console.log(place);
 
-  if (place.error) notFound();
+  if (place.error === "Unauthorized") redirect("/login");
+  else if (place.error) notFound();
 
   return <EventPage news={event.data} place={place.data} />;
 }
