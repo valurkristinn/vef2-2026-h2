@@ -1,6 +1,11 @@
+'use client'
 import Link from "next/link";
 
+
 export default function Nav() {
+
+
+
   return (
     <header>
     <nav className="fixed w-full top-0 p-6 markdown-body">

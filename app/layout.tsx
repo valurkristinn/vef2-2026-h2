@@ -4,6 +4,8 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
+import { UserProvider } from './Context';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,11 +26,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
+        <UserProvider>
         <Nav />
         <main className="markdown-body max-w-3xl w-[90vw] !mx-auto px-6 !my-20 ">
+          
           {children}
+          
         </main>
         <Footer />
+        </UserProvider>
       </body>
     </html>
   );

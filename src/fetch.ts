@@ -1,4 +1,6 @@
+'use server'
 import { EventType } from "./types";
+import { cookies } from "next/headers";
 
 const BASE_URL=process.env.API_URL || "http://localhost:4000"
 
@@ -6,6 +8,25 @@ async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(process.env.API_URL + url, req);
 
   return response.json();
+}
+
+export async function getUser(){
+  const response = await fetch(BASE_URL + "/user/loggedin",
+  {
+    method: "GET",
+    headers: { "Content-Type": "application/json"
+    },
+    credentials: "include",
+  }
+  )
+
+  if(!response.ok){
+    return {error:"Vesen að sækja notanda",success:false}
+  }
+
+  const user = await response.json()
+  
+  return {user:user,success:true}
 }
 
 export async function login(credentials:{email:string, password:string}) {
@@ -43,7 +64,7 @@ export async function signup(credentials:{name:string, email:string, password:st
     },
   );
 
-  
+  console.log(response)
   if(!response.ok){
     return {error:"signup failure"}
   }

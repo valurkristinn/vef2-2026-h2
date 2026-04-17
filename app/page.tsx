@@ -7,6 +7,7 @@ const MIN_PAGE = 1;
 
 const eventsList = await getEvents();
 
+
 export default async function Home({
   searchParams,
 }: {
@@ -24,6 +25,7 @@ export default async function Home({
   const events = await getEvents((limitedPage - 1) * limit);
 
   if (!events) notFound();
+    
 
   return (
     <>
@@ -33,6 +35,9 @@ export default async function Home({
         <span>Síða {limitedPage}</span>
         <Link href={`./?page=${limitedPage + 1}`}>→</Link>
       </div>
+      
     </>
   );
 }
+
+  

@@ -6,6 +6,7 @@ export default function EventList({
 }: {
   news: EventType[];
 }) {
+
   return (
     <section>
     <h1>Fréttir</h1>
