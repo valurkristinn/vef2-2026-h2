@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-import { getEventById, getPlaceById, getData, updateEvent } from "@/src/fetch";
+import { getEventById, getPlaceById, getData, updateEvent, isAdmin } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
 import EventForm from "@/components/EventForm";
 
@@ -63,11 +63,8 @@ export default async function Event({
   if (event.error) notFound();
 
   if (edit && edit.toLowerCase() === "true") {
-    const session = await getData("/api/auth/session", cookieString);
-    console.log("session user", session);
-    console.log("user's role", session?.user.role);
 
-    if (!session?.user || session.user.role !== "ADMIN") {
+    if (! (await isAdmin(cookieString))) {
       redirect("/login");
     }
 

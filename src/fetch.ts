@@ -1,24 +1,22 @@
 import { EventType } from "./types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000"
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 async function fetchApi(url: string, req: RequestInit) {
   const response = await fetch(BASE_URL + url, req);
 
-  console.log("fetchResult:", response);
-
-  const json = await response.text();
-
-  if (!json) {
-    console.error("fetching json went wrong, returning null");
+  if (!response.ok) {
+    const text = await response.text();
+    console.error("Request failed:", response.status, text);
     return null;
   }
 
   try {
-    return JSON.parse(json);
+    const json = await response.json();
+    return json ?? null;
   } catch (error) {
-    console.error("Invalid JSON response:", json);
-    throw error;
+    console.error("Invalid JSON response" + error);
+    return null;
   }
 }
 
@@ -99,4 +97,17 @@ export async function getEventById(id: number) {
 
 export async function getPlaceById(id: number, cookie: string) {
   return await getData("/place/" + id, cookie);
+}
+
+export async function isAdmin(cookie: string) {
+  console.log("cookie being sent:", cookie);
+  const response = await fetchApi("/api/auth/get-session", {
+    method: "GET",
+    headers: { Cookie: cookie },
+    credentials: "include",
+  });
+
+  console.log("get-session response:", response);
+
+  return response?.user?.email === "admin@example.org";
 }
