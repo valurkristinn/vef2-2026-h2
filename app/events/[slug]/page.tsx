@@ -59,9 +59,9 @@ export default async function Event({
 
   const loginn = await login({email:"admin@example.org",password:"admin12345"});
 
-  if (!loginn) redirect("/login");
+  if (!loginn.success) redirect("/login");
 
-  const place = await getPlaceById(event.data.placeID, login);
+  const place = await getPlaceById(event.data.placeID, loginn.success);
 
   if (place.error === "Unauthorized") redirect("/login");
 
