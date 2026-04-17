@@ -10,7 +10,7 @@ async function fetchApi(url: string, req: RequestInit) {
   const json = await response.text();
 
   if (!json) {
-    console.error("");
+    console.error("fetching json went wrong, returning null");
     return null;
   }
 
