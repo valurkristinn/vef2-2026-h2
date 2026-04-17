@@ -1,4 +1,5 @@
 import { EventType, PlaceType } from "@/src/types";
+import Image from "next/image";
 
 export default function EventPage({
   news,
@@ -7,16 +8,14 @@ export default function EventPage({
   news: EventType;
   place: PlaceType;
 }) {
-  console.log(news);
+
     const imgUrl = news.images?.[0]?.image
   ? ".." + news.images[0].image
-  : null;
-    console.log(news.images)
-    console.log(imgUrl)
+  : "";
   return (
     <section>
       <h1>{news.title}</h1>
-      <img src={imgUrl}></img>
+      <Image src={imgUrl} alt="eventimg"></Image>
       <h4>{news.description}</h4>
       <p>Staður: {place.address}</p>
       <p>Hafa samband: {place.email}</p>
