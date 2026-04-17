@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 
-import { adminLogin, getEventById, getPlaceById } from "@/src/fetch";
+import { login, getEventById, getPlaceById } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
 
 // import { EventType } from "@/src/types";
@@ -57,11 +57,11 @@ export default async function Event({
 
   if (event.error) notFound();
 
-  const login = await adminLogin();
+  const loginn = await login({email:"admin@example.org",password:"admin12345"});
 
-  if (!login) redirect("/login");
+  if (!loginn.success) redirect("/login");
 
-  const place = await getPlaceById(event.data.placeID, login);
+  const place = await getPlaceById(event.data.placeID, loginn.success);
 
   if (place.error === "Unauthorized") redirect("/login");
 
