@@ -1,9 +1,7 @@
 ###ATHUGASEMD
-Það þarf að sækja breytingar frá hópverkefni 1 þar sem nokkrar breytingar voru gerðar. 
+Það þarf að sækja breytingar frá hópverkefni 1 þar sem nokkrar breytingar voru gerðar á meðan hópverkefni 2 var í vinnslu. 
 [Link á h1 repo](https://github.com/ThoraDis/Vef2-H-pverkefni1)
 
-```
-```
 ### Uppsetning
 ```
 npm install
