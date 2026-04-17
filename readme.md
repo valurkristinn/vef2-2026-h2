@@ -1,3 +1,9 @@
+### Uppsetning
+```
+npm install
+npm run dev
+```
+
 # Vefforritun 2, 2026, hópverkefni 2
 
 Útfæra skal React framenda með Next.js ofan á vefþjónustur úr hópverkefni 1.
@@ -130,6 +136,13 @@ Sett verða fyrir ([sjá nánar í kynningu á áfanga](https://github.com/veffo
 - fimm minni sem gilda 10% hvert, samtals 50% af lokaeinkunn.
 - tvö hópverkefni þar sem hvort um sig gildir 20%, samtals 40% af lokaeinkunn.
 - einstaklingsverkefni sem gildir 15–25% af lokaeinkunn.
+
+### Hóp 4 
+Nöfn | Notendanofn
+- Þóra Dís Garðarsdóttir| ThoraDis
+- Valur Kristinn Starkaðarson | valurkristinn
+- Dagur Ingi Viðar | DagurVidar
+- Jóhann Chanse Sigurðsson | johannhawk
 
 ---
 
