@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-import { getEventById, getPlaceById, getData, updateEvent, isAdmin } from "@/src/fetch";
+import { getEventById, getPlaceById, isAdmin } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
 import EventForm from "@/components/EventForm";
 
