@@ -33,7 +33,7 @@ export default function Signup(){
     
     <form onSubmit={onSubmit}>
         <h1>Sign up</h1>
-
+        <h4>Nafn</h4>
         <input
           type="name"
           placeholder="Name"
@@ -41,7 +41,7 @@ export default function Signup(){
           onChange={(e) => setName(e.target.value)}
           required
         />
-
+        <h4>Email</h4>
         <input
           type="email"
           placeholder="Email"
@@ -49,7 +49,7 @@ export default function Signup(){
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-
+        <h4>Password</h4>
         <input
           type="password"
           placeholder="Password"
@@ -57,11 +57,11 @@ export default function Signup(){
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-
+        <br></br>
         {error && <p>{error}</p>}
 
         <button type="submit">
-          Signup
+          Sign upp
         </button>
       </form>
         
