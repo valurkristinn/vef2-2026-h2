@@ -21,6 +21,10 @@ export default function Signup(){
     const response = await signup({name, email, password });
     console.log(response)
 
+    if(response.error){
+      setError("Innskráning tókst ekki. Lykilorð þarf að vera 5 á lengd eða email er rangt.")
+      return
+    }
     router.push("/");
 
   }

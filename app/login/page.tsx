@@ -20,6 +20,10 @@ export default function Login(){
     const response = await login({ email, password });
     console.log(response)
 
+    if(response.error){
+      setError("Rangur innsláttur á email/lykilorði")
+      return
+    }
     router.push("/");
 
   }
@@ -27,7 +31,7 @@ export default function Login(){
     return(
     
     <form onSubmit={onSubmit}>
-        <h1>Admin Login</h1>
+        <h1>Login</h1>
 
         <input
           type="email"
