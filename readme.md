@@ -146,6 +146,13 @@ Nöfn | Notendanofn
 
 ---
 
+Admin login er 
+```
+"email": "admin@example.org",
+"password": "admin12345"
+```
+
+
 > Útgáfa 0.1
 
 | Útgáfa | Breyting      |
