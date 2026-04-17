@@ -2,6 +2,7 @@ import { notFound, redirect } from "next/navigation";
 
 import { login, getEventById, getPlaceById } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
+import { cookies } from "next/headers";
 
 // import { EventType } from "@/src/types";
 // import EventForm from "@/components/EventForm";
@@ -57,11 +58,12 @@ export default async function Event({
 
   if (event.error) notFound();
 
-  const loginn = await login({email:"admin@example.org",password:"admin12345"});
+  const cookieStore = await cookies();
+  const cookieString = cookieStore.toString();
 
-  if (!loginn.success) redirect("/login");
+  const place = await getPlaceById(event.data.placeID, cookieString);
 
-  const place = await getPlaceById(event.data.placeID, loginn.success);
+  console.log(place)
 
   if (place.error === "Unauthorized") redirect("/login");
 
