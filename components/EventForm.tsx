@@ -65,7 +65,7 @@ export default function EventForm({ event }: { event: EventType }) {
       />
 
       <label>
-        Sold out?
+        Uppselt?
         <input
           type="checkbox"
           checked={soldOut}
@@ -75,7 +75,7 @@ export default function EventForm({ event }: { event: EventType }) {
 
       {error && <p>{error}</p>}
 
-      <button type="submit">Save</button>
+      <button type="submit">Vista</button>
     </form>
   );
 }

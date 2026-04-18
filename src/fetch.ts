@@ -8,15 +8,15 @@ async function fetchApi(url: string, req: RequestInit) {
   if (!response.ok) {
     const text = await response.text();
     console.error("Request failed:", response.status, text);
-    return null;
+    return response.status;
   }
 
   try {
     const json = await response.json();
-    return json ?? null;
+    return json;
   } catch (error) {
     console.error("Invalid JSON response" + error);
-    return null;
+    return error;
   }
 }
 
@@ -84,7 +84,7 @@ async function getList(url: string, offset?: number) {
   if (!offset) {
     offset = 0;
   }
-  return await getData(url + "?offset=" + offset, "");
+  return await getData(url + "?offset=" + offset ,  "");
 }
 
 export async function getEvents(offset?: number) {
@@ -100,14 +100,11 @@ export async function getPlaceById(id: number, cookie: string) {
 }
 
 export async function isAdmin(cookie: string) {
-  console.log("cookie being sent:", cookie);
   const response = await fetchApi("/api/auth/get-session", {
     method: "GET",
     headers: { Cookie: cookie },
     credentials: "include",
   });
-
-  console.log("get-session response:", response);
 
   return response?.user?.email === "admin@example.org";
 }
