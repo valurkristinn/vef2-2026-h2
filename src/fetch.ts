@@ -99,6 +99,10 @@ export async function getPlaceById(id: number, cookie: string) {
   return await getData("/place/" + id, cookie);
 }
 
+export async function getImages( cookie: string) {
+  return await getData("/image/", cookie);
+}
+
 export async function isAdmin(cookie: string) {
   const response = await fetchApi("/api/auth/get-session", {
     method: "GET",

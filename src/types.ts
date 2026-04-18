@@ -18,6 +18,13 @@ export type PlaceType = {
   address: string;
 };
 
+export type ImageType = {
+  id: number;
+  image: string;
+  createdAt: string;
+  eventId: number
+};
+
 export type ListType<T> = {
   data: T[];
   paging: {

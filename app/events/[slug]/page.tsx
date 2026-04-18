@@ -1,9 +1,10 @@
 import { notFound, redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-import { getEventById, getPlaceById, isAdmin } from "@/src/fetch";
+import { getEventById, getImages, getPlaceById, isAdmin } from "@/src/fetch";
 import EventPage from "@/components/EventPage";
 import EventForm from "@/components/EventForm";
+import { ImageType } from "@/src/types";
 
 export default async function Event({
   params,
@@ -27,8 +28,7 @@ export default async function Event({
   if (event.error) notFound();
 
   if (edit && edit.toLowerCase() === "true") {
-
-    if (! (await isAdmin(cookieString))) {
+    if (!(await isAdmin(cookieString))) {
       redirect("/login");
     }
 
@@ -40,5 +40,15 @@ export default async function Event({
   if (place === 401) redirect("/login");
   else if (place.error) notFound();
 
-  return <EventPage news={event.data} place={place.data} />;
+  const img = await getImages(cookieString);
+  console.log(img);
+
+  const imgUrl =
+    !img || img.error
+      ? undefined
+      : img.data?.find((image: ImageType) => image.eventId === event.data.id);
+
+  console.log(imgUrl);
+
+  return <EventPage news={event.data} place={place.data} imgUrl={imgUrl.image} />;
 }

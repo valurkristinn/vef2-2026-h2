@@ -1,20 +1,23 @@
 import { EventType, PlaceType } from "@/src/types";
+import Image from "next/image";
 
 export default function EventPage({
   news,
   place,
+  imgUrl,
 }: {
   news: EventType;
   place: PlaceType;
+  imgUrl: string;
 }) {
-  console.log(news);
-  const imgUrl = news.images?.[0]?.image ? ".." + news.images[0].image : null;
-  console.log(news.images);
-  console.log(imgUrl);
   return (
     <section>
       <h1>{news.title}</h1>
-      {imgUrl && <img src={imgUrl}></img>}
+      {imgUrl && (
+        <div className="img-container">
+          <Image src={imgUrl} alt="eventimg" fill></Image>
+        </div>
+      )}
       <h4>{news.description}</h4>
       <p>Staður: {place.address}</p>
       <p>Hafa samband: {place.email}</p>

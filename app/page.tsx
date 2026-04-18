@@ -3,6 +3,7 @@ import { getEvents, isAdmin } from "@/src/fetch";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 
 const MIN_PAGE = 1;
 
@@ -40,14 +41,18 @@ export default async function Home({
         að skoða event meira
       </p>
       <div className="img-container">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1772289935247-2de4bcacd7b4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyM3x8fGVufDB8fHx8fA%3D%3D"
           alt="Fjöll"
-        ></img>
-        <img
+          fill 
+        ></Image>
+      </div>
+      <div className="img-container">
+        <Image
           src="https://images.unsplash.com/photo-1773236759289-251d9687b6e3?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Blóm"
-        ></img>
+          fill
+        ></Image>
       </div>
       <EventList news={events.data} showAdmin={showAdmin} />
       <div>
